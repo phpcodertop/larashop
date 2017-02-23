@@ -5,11 +5,16 @@
     <title>@yield('title')</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/4005db0b8c.js"></script>
+    <link rel="stylesheet" href="{{ URL::to('src/css/app.css') }}">
     @yield('styles')
 </head>
 <body>
+@include('partials.header')
+<div class="container">
+    @yield('content')
+</div>
 
-@yield('content')
 <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
