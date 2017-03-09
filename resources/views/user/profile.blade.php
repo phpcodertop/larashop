@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Sign Up to LaraShop
+    LaraShop User Profile
 @endsection
 @section('content')
     <div class="row">

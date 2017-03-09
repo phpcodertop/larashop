@@ -16,27 +16,62 @@ Route::get('/', [
     'as'   => 'product.index'
 ]);
 
-Route::get('/signup', [
-    'uses' => "UserController@getSignUp",
-    'as'   => 'user.signup'
+Route::get('/add-to-cart/{id}' , [
+    'uses' => 'ProductController@getAddToCart',
+    'as'   => 'product.addtocart'
 ]);
 
-Route::post('/signup', [
-    'uses' => "UserController@postSignUp",
-    'as'   => 'user.signup'
+Route::get('shopping-cart', [
+    'uses' => 'ProductController@getCart',
+    'as'   => 'product.shoppingCart'
 ]);
 
-Route::get('/signin', [
-    'uses' => "UserController@getSignIn",
-    'as'   => 'user.signin'
+Route::get('checkout', [
+    'uses' => 'ProductController@getCheckout',
+    'as'   => 'checkout'
 ]);
 
-Route::post('/signin', [
-    'uses' => "UserController@postSignIn",
-    'as'   => 'user.signin'
+Route::post('checkout', [
+    'uses' => 'ProductController@postCheckout',
+    'as'   => 'checkout'
 ]);
 
-Route::get('/user/profile', [
-    'uses' => "UserController@getProfile",
-    'as'   => 'user.profile'
-]);
+Route::group(['prefix' => 'user'] , function(){
+
+    Route::group(['middleware' => 'guest'],function(){
+        Route::get('/signup', [
+            'uses' => "UserController@getSignUp",
+            'as'   => 'user.signup'
+        ]);
+
+        Route::post('/signup', [
+            'uses' => "UserController@postSignUp",
+            'as'   => 'user.signup'
+        ]);
+
+        Route::get('/signin', [
+            'uses' => "UserController@getSignIn",
+            'as'   => 'user.signin'
+        ]);
+
+        Route::post('/signin', [
+            'uses' => "UserController@postSignIn",
+            'as'   => 'user.signin'
+        ]);
+
+    });
+
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/profile', [
+            'uses' => "UserController@getProfile",
+            'as'   => 'user.profile'
+        ]);
+
+        Route::get('/logout', [
+            'uses' => "UserController@getLogOut",
+            'as'   => 'user.logout'
+        ]);
+    });
+
+
+});

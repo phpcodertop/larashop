@@ -47,4 +47,9 @@ class UserController extends Controller
     public function getProfile(){
         return view('user.profile');
     }
+
+    public function getLogOut(){
+        Auth::logout();
+        return redirect()->back();
+    }
 }
